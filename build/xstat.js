@@ -1,0 +1,2 @@
+(s=>{"use strict";class NA{}const t=new NA;Float64Array;s.NA=NA,s.na=t,s.Sample=class Sample{};s.Normal=class Normal{constructor(s=t,a=t){this.μ=s,this.σ2=a}}})(exports||(this.Xstat={}));
+//# sourceMappingURL=xstat.map
