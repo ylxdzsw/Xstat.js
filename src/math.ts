@@ -136,6 +136,4 @@ const combination = (n: number, m: number): number => {
     return res
 }
 
-Xstat.Γ = Γ
-Xstat.erf = erf
-Xstat.combination = combination
+Xstat.math = { Γ, erf, combination }
