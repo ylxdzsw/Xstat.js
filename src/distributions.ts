@@ -177,7 +177,11 @@ class Empirical extends Distribution {
 
     estimate(x: Float64Array, v?: string) {
         if (!v) {
-            return this
+            if (!this.data) {
+                return new Empirical(x)
+            } else {
+                return this
+            }
         }
 
         switch (v) {

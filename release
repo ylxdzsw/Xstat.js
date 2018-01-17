@@ -8,7 +8,7 @@ const files = fs.readdirSync(__dirname + '/src').map(x => __dirname + '/src/' + 
 const license = fs.readFileSync(__dirname + '/license.txt', 'utf8')
 const tscode = files.map(x=>fs.readFileSync(x)).reduce((x,y)=>x+y, '')
 const jscode = ts.transpileModule(tscode, { compilerOptions: { target: 'ES2017', strict: true } })
-const template = `((Xstat)=>{${jscode.outputText}})(exports||(this.Xstat={}))` // this breaks sourcemap
+const template = `((Xstat)=>{${jscode.outputText}})(this.exports||(this.Xstat={}))` // this breaks sourcemap
 const minified = es.minify(template, { ecma: 8/*, keep_classnames: true*/ })
 
 fs.writeFile(__dirname + "/xstat.js", `/*${license}*/${minified.code}`, ()=>0)
