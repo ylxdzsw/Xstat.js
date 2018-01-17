@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const ts = require('typescript')
-const es = require('uglify-es')
 
 const files = fs.readdirSync(__dirname + '/src').map(x => __dirname + '/src/' + x)
 const read = require('util').promisify(fs.readFile)
@@ -19,11 +18,8 @@ const compile = async () => {
 
     const tscode = (await Promise.all(files.map(x=>read(x)))).reduce((x,y)=>x+y, '')
     const jscode = ts.transpileModule(tscode, { compilerOptions: { target: 'ES2017', strict: true } })
-    const template = `((Xstat)=>{${jscode.outputText}})(exports||(this.Xstat={}))` // this breaks sourcemap
-    const minified = es.minify(template, { sourceMap: { url: "xstat.map" }, ecma: 8, keep_classnames: true })
 
-    fs.writeFile(__dirname + "/build/xstat.js", minified.code, ()=>0)
-    fs.writeFile(__dirname + "/build/xstat.map", minified.map, ()=>0)
+    fs.writeFile(__dirname + "/xstat.js", `((Xstat)=>{${jscode.outputText}})(exports||(this.Xstat={}))`, ()=>0)
 
     console.log(`compiled at ${new Date().toLocaleTimeString()}`)
 }

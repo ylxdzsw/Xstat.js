@@ -18,7 +18,7 @@ namespace sampling {
 
         let X
         if (typeof(M) == 'number') {
-            X = new vec(n).map(x => {
+            X = new Float64Array(n).map(x => {
                 while (true) {
                     const y = env.sample() as number
                     if (random() < pdf(y) / M / env.pdf(y))
@@ -49,7 +49,7 @@ namespace sampling {
                 }
             }
 
-            X = new vec(res.map(x=>x[0]))
+            X = new Float64Array(res.map(x=>x[0]))
         }
 
         return o.n ? X : X[0]

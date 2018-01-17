@@ -136,4 +136,11 @@ const combination = (n: number, m: number): number => {
     return res
 }
 
+const sum = (x: Float64Array): number => {
+    let sum = 0
+    for (let i = 0; i < x.length; i++)
+        sum += x[i]
+    return sum
+}
+
 Xstat.math = { Γ, erf, combination }
